@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend:/app
+      - ./local-storage:/local-storage
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PAYMENT_MODE=mock
+      - AWS_REGION=us-east-1
+      # Disable DB updates in dev mock
+      - MOCK_DB=true
+    # depends_on:
+    #   - dynamodb # Uncomment if you want real local Dynamo
+
+    # Optional Local Dynamo
+    # dynamodb:
+    #   image: amazon/dynamodb-local
+    #   ports:
+    #     - "8000:8000"
+    #   command: "-jar DynamoDBLocal.jar -sharedDb -inMemory"

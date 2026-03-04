@@ -1,0 +1,63 @@
+{
+    "Inputs": [
+        {
+            "AudioSelectors": {
+                "Audio Selector 1": {
+                    "DefaultSelection": "DEFAULT"
+                }
+            },
+            "VideoSelector": {},
+            "TimecodeSource": "ZEROBASED",
+            "FileInput": "s3://input-bucket/input/video.mp4"
+        }
+    ],
+    "OutputGroups": [
+        {
+            "Name": "Apple HLS",
+            "OutputGroupSettings": {
+                "Type": "HLS_GROUP_SETTINGS",
+                "HlsGroupSettings": {
+                    "SegmentLength": 4,
+                    "MinSegmentLength": 0,
+                    "Destination": "s3://output-bucket/output/"
+                }
+            },
+            "Outputs": [
+                {
+                    "ContainerSettings": {
+                        "Container": "M3U8",
+                        "M3u8Settings": {}
+                    },
+                    "VideoDescription": {
+                        "Width": 1280,
+                        "Height": 720,
+                        "CodecSettings": {
+                            "Codec": "H_264",
+                            "H264Settings": {
+                                "MaxBitrate": 2000000,
+                                "RateControlMode": "QVBR",
+                                "SceneChangeDetect": "TRANSITION_DETECTION"
+                            }
+                        }
+                    },
+                    "AudioDescriptions": [
+                        {
+                            "CodecSettings": {
+                                "Codec": "AAC",
+                                "AacSettings": {
+                                    "Bitrate": 96000,
+                                    "CodingMode": "CODING_MODE_2_0",
+                                    "SampleRate": 48000
+                                }
+                            }
+                        }
+                    ],
+                    "NameModifier": "_720p"
+                }
+            ]
+        }
+    ],
+    "TimecodeConfig": {
+        "Source": "ZEROBASED"
+    }
+}

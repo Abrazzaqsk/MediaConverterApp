@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.*
+!.env.example
+dist/
+coverage/
+.temp/
+.DS_Store
+local-storage/
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+myvideo.mp4

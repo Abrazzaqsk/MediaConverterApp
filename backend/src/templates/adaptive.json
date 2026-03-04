@@ -1,0 +1,125 @@
+{
+    "Inputs": [
+        {
+            "AudioSelectors": {
+                "Audio Selector 1": {
+                    "DefaultSelection": "DEFAULT"
+                }
+            },
+            "VideoSelector": {},
+            "TimecodeSource": "ZEROBASED",
+            "FileInput": "s3://input-bucket/input/video.mp4"
+        }
+    ],
+    "TimecodeConfig": {
+        "Source": "ZEROBASED"
+    },
+    "OutputGroups": [
+        {
+            "Name": "Apple HLS",
+            "OutputGroupSettings": {
+                "Type": "HLS_GROUP_SETTINGS",
+                "HlsGroupSettings": {
+                    "SegmentLength": 4,
+                    "MinSegmentLength": 0,
+                    "Destination": "s3://output-bucket/output-hls/"
+                }
+            },
+            "Outputs": [
+                {
+                    "ContainerSettings": {
+                        "Container": "M3U8",
+                        "M3u8Settings": {}
+                    },
+                    "VideoDescription": {
+                        "Width": 1920,
+                        "Height": 1080,
+                        "CodecSettings": {
+                            "Codec": "H_264",
+                            "H264Settings": {
+                                "MaxBitrate": 5000000,
+                                "RateControlMode": "QVBR",
+                                "SceneChangeDetect": "TRANSITION_DETECTION"
+                            }
+                        }
+                    },
+                    "AudioDescriptions": [
+                        {
+                            "CodecSettings": {
+                                "Codec": "AAC",
+                                "AacSettings": {
+                                    "Bitrate": 128000,
+                                    "CodingMode": "CODING_MODE_2_0",
+                                    "SampleRate": 48000
+                                }
+                            }
+                        }
+                    ],
+                    "NameModifier": "_1080p"
+                },
+                {
+                    "ContainerSettings": {
+                        "Container": "M3U8",
+                        "M3u8Settings": {}
+                    },
+                    "VideoDescription": {
+                        "Width": 1280,
+                        "Height": 720,
+                        "CodecSettings": {
+                            "Codec": "H_264",
+                            "H264Settings": {
+                                "MaxBitrate": 2800000,
+                                "RateControlMode": "QVBR",
+                                "SceneChangeDetect": "TRANSITION_DETECTION"
+                            }
+                        }
+                    },
+                    "AudioDescriptions": [
+                        {
+                            "CodecSettings": {
+                                "Codec": "AAC",
+                                "AacSettings": {
+                                    "Bitrate": 96000,
+                                    "CodingMode": "CODING_MODE_2_0",
+                                    "SampleRate": 48000
+                                }
+                            }
+                        }
+                    ],
+                    "NameModifier": "_720p"
+                },
+                {
+                    "ContainerSettings": {
+                        "Container": "M3U8",
+                        "M3u8Settings": {}
+                    },
+                    "VideoDescription": {
+                        "Width": 854,
+                        "Height": 480,
+                        "CodecSettings": {
+                            "Codec": "H_264",
+                            "H264Settings": {
+                                "MaxBitrate": 1400000,
+                                "RateControlMode": "QVBR",
+                                "SceneChangeDetect": "TRANSITION_DETECTION"
+                            }
+                        }
+                    },
+                    "AudioDescriptions": [
+                        {
+                            "CodecSettings": {
+                                "Codec": "AAC",
+                                "AacSettings": {
+                                    "Bitrate": 96000,
+                                    "CodingMode": "CODING_MODE_2_0",
+                                    "SampleRate": 48000
+                                }
+                            }
+                        }
+                    ],
+                    "NameModifier": "_480p"
+                }
+            ]
+        }
+    ]
+}
