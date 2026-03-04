@@ -41,7 +41,7 @@ Open a new terminal tab and start the React frontend:
 \```bash
 cd frontend
 cp .env.example .env.local
-# Edit .env.local to set VITE_API_URL=http://localhost:3000
+Edit .env.local to set VITE_API_URL=http://localhost:3000
 npm install
 npm run dev
 \```
