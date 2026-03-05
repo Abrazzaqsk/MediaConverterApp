@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - ./backend:/app
+      - /app/node_modules
       - ./local-storage:/local-storage
     ports:
       - "3000:3000"
@@ -16,6 +17,7 @@ services:
       - AWS_REGION=us-east-1
       # Disable DB updates in dev mock
       - MOCK_DB=true
+    command: sh -c "npm install && chmod +x ./node_modules/.bin/* && npm run dev"
     # depends_on:
     #   - dynamodb # Uncomment if you want real local Dynamo
 
@@ -25,3 +27,17 @@ services:
     #   ports:
     #     - "8000:8000"
     #   command: "-jar DynamoDBLocal.jar -sharedDb -inMemory"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:3000
+    depends_on:
+      - backend

@@ -1,6 +1,4 @@
 node_modules/
-.env
-.env.*
 !.env.example
 dist/
 coverage/
@@ -12,3 +10,4 @@ local-storage/
 *.tfstate
 *.tfstate.backup
 myvideo.mp4
+config.bat
